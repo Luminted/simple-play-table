@@ -1,0 +1,26 @@
+{
+  "name": "simple_card_sandbox",
+  "version": "0.0.0",
+  "description": "Simple, real-time, sandbox, multiplayer card game.",
+  "main": "index.js",
+  "dependencies": {
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "mainloop.js": "^1.0.4",
+    "socket.io": "^2.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test",
+    "serve": "nodemon ./server/server.bundle.js --config nodemon.json"
+  },
+  "keywords": [
+    "sandbox",
+    "real-time",
+    "card",
+    "game",
+    "multiplayer"
+  ],
+  "author": "Levente Rozsenich",
+  "license": "ISC"
+}

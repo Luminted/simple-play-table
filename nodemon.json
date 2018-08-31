@@ -1,0 +1,11 @@
+{
+    "events": {
+        "restart" : "rollup client/client.js --file ./client/client.bundle.js --format iife; rollup server/server.js --file ./server/server.bundle.js --format iife",
+        "start" : "rollup client/client.js --file ./client/client.bundle.js --format iife; rollup server/server.js --file ./server/server.bundle.js --format iife"
+    },
+    "ignore": [
+        ".git",
+        "node_modules/**/node_modules",
+        "*.bundle.*"
+      ]
+}
