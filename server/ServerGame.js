@@ -1,48 +1,55 @@
 import Card from "./game_objects/ServerCard";
+import Deck from "./game_objects/ServerDeck";
+import DECK_TYPES from "./game_objects/DeckTypes";
+const UUID = require('node-uuid');
+
 
 export default class ServerGame{
-    constructor(id){
-        this._id = id;
-        this._state = {};
-        this._state._gameObjects = {};
-        this._state._gameObjects.cards = {};
-        this._state.clients = {};
+    constructor(){
+        this._id = 'game-' + UUID();;
+        this._gameObjects = {};
+        this._gameObjects.cards = {};
+        this._gameObjects.decks = {};
+        this._clients = {};
 
         //setting up test cards
         let card = new Card(100,100);
-        let card2 = new Card(100,10);
-        let card3 = new Card(10,100);
-        let card4 = new Card(200,200);
+        let deck = new Deck(DECK_TYPES.FRENCH, 150, 150);
         this.gameObjects.cards[card.id] = card;
-        this.gameObjects.cards[card2.id] = card2;
-        this.gameObjects.cards[card3.id] = card3;
-        this.gameObjects.cards[card4.id] = card4;
+        this.gameObjects.decks[deck.id] = deck;
 
         console.log('server game ready');
     }
 
-    initGame(){
-        let card = new Card(100,100);
-        this._state._gameObjects.cards[card.id] = card;
-        return this.state;
-    }
-
     get gameObjects(){
-        return this._state._gameObjects;
+        return this._gameObjects;
     }
 
     getGameObjectById(id){
-        return this._gameObjects[id];
+        let object = this._gameObjects.cards[id] || this._gameObjects.decks[id];
+        return object;
     }
 
     getState(){
+        let cardStates = {};
+        let cards = this._gameObjects.cards;
+        for(let cardId in cards){
+            cardStates[cardId] = cards[cardId].state;
+        }
+        let deckStates = {}
+        let decks = this._gameObjects.decks;
+        for(let deckId in decks){
+            deckStates[deckId] = decks[deckId].state;
+        }
         return {
-            cards: this._state._gameObjects.cards
+            gameId: this._id,
+            cards: cardStates,
+            decks: deckStates,
         };
     }
 
     addClient(client){
-        this._state[client.id] = client;
+        this._clients[client.id] = client;
     }
 
     get id(){
