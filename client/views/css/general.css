@@ -23,3 +23,15 @@
   text-indent: -9999px;
   background: url(http://localhost:4004/assets/red_cardback.svg);
 }
+
+.container.center-aligned{
+  position: inherit;
+  margin-right: auto;
+  margin-left: auto;
+  width: 50%;
+}
+
+.game-init-button{
+  background: lightcoral;
+  text-align: center;
+}
