@@ -22,6 +22,7 @@ export default class ServerDeck {
                         for (let suit in config.cards) {
                             for (let card in config.cards[suit]) {
                                 deck.push({
+                                    id: 'card-' + UUID(),
                                     suit: suit,
                                     face: card
                                 });
@@ -36,28 +37,20 @@ export default class ServerDeck {
             }).then((function (deck) {
             this._cards = this.shuffle(deck);
         }.bind(this)));
+
+        
     }
 
-    populateCardListFromConfig(err, data) {
-        let config = JSON.parse(data);
-        for (let suit in config.cards) {
-            for (let card in config.cards[suit]) {
-                this._cards.push({
-                    suit: suit,
-                    face: card
-                });
-
-            }
-        }
-    }
-
-    onMouseUp(ev){
+    onMouseUp(payload){
+        console.log('deck card ', this._cards);
         let topCard = this._cards.pop();
-        return this.cardFactory(topCard, this._posX, this.posY); 
+        console.log('server deck mouse up')
+        return this.cardFactory(topCard, this._posX, this._posY); 
     }
 
     cardFactory(cardRep, posX,posY){
-        return newCard = new Card(this._posX, this._posY, cardRep.suit, cardRep.face);
+        console.log('server card factor ', posX, posY);
+        return new Card(posX, posY, cardRep.suit, cardRep.face, cardRep.id);
     }
 
     /**

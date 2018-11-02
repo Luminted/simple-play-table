@@ -21,7 +21,7 @@ export default class ClientCard {
         this._cardElement.style.top = this._posY + 'px';
         this._cardElement.style.left = this._posX + 'px';
         this._cardElement.style.backgroundSize = this._CARD_WIDTH * this._cardScale + 'px ' + this._CARD_HEIGHT * this._cardScale + 'px';
-        this._cardElement.style.position = 'relative';
+        this._cardElement.style.position = 'absolute';
         this._cardElement.classList.add('card-ace-of-spades');
         this._cardElement.id = this._id;
         //registering listeners
@@ -29,7 +29,7 @@ export default class ClientCard {
         // this._cardElement.onmouseup = this.onMouseUp.bind(this);
         // document.addEventListener('mousemove', this.onMouseMove.bind(this));
 
-        console.log('card consturcted ', this._cardElement);
+        console.log('card consturcted ', this._id);
     }
 
     onMouseDown(ev) {
@@ -78,6 +78,10 @@ export default class ClientCard {
 
     attachToDOM(DOM) {
         DOM.appendChild(this._cardElement);
+    }
+
+    update(payload){
+       this.moveTo(payload.posX, payload.posY);
     }
 
     get id(){

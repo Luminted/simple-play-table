@@ -30,7 +30,7 @@ export default class ServerGame{
         return object;
     }
 
-    getState(){
+    get state(){
         let cardStates = {};
         let cards = this._gameObjects.cards;
         for(let cardId in cards){
@@ -50,6 +50,22 @@ export default class ServerGame{
 
     addClient(client){
         this._clients[client.id] = client;
+    }
+
+    addCard(card){
+        if(card instanceof Card){
+            this._gameObjects.cards[card.id] = card;
+        }else{
+            throw "Only instances of ServerCard are allowed to be added!"
+        }
+    }
+
+    addDeck(deck){
+        if(card instanceof Deck){
+            this._gameObjects.decks[deck.id] = deck;
+        }else{
+            throw "Only instances of ServerDeck are allowed to be added!"
+        }
     }
 
     get id(){

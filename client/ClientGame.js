@@ -26,8 +26,7 @@ export default class ClientGame{
                 let posX = cards[cardId].posX;
                 let posY = cards[cardId].posY;
                 let card = new ClientCard(cardId, posX,posY);
-                this._gameObjects.cards[cardId] = card;
-                card.attachToDOM(gameArea);
+                this.addCard(card);
 
             }
         }
@@ -40,8 +39,7 @@ export default class ClientGame{
                 let cards = decks[deckId].cards;
                 let type = decks[deckId].type;
                 let deck = new ClientDeck(deckId, type, cards, posX, posY);
-                this._gameObjects.decks[deckId] = deck;
-                deck.attachToDOM(gameArea);
+                this.addDeck(deck);
             }
         }
 
@@ -63,6 +61,15 @@ export default class ClientGame{
         }else{
             this._gameObjects.cards[card.id] = card;
             card.attachToDOM(document.querySelector('#gameTable'));
+        }
+    }
+
+    addDeck(deck){
+        if(!deck instanceof ClientDeck){
+            throw "Method can only add ClientDeck objects!";
+        }else{
+            this._gameObjects.decks[deck.id] = deck;
+            deck.attachToDOM(document.querySelector('#gameTable'));
         }
     }
 

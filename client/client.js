@@ -1,5 +1,6 @@
 ;
-import Card from './game_objects/ClientCard.js';
+import Card from './game_objects/ClientCard';
+import Deck from './game_objects/ClientDeck';
 import ClientGame from './ClientGame.js';
 
 window.onload = init;
@@ -69,11 +70,23 @@ function emitMouseUp(injectedPayload) {
 //================== Socket Event Handlers ==================
 
 function cardUpdateHandler(payload) {
-    console.log(payload);
     let card = state.game.getGameObjectById(payload.id);
-    card.moveTo(payload.posX, payload.posY);
+    if (card) {
+        card.update(payload);
+    } else {
+        let newCard = new Card(payload.id, payload.posX, payload.posY, payload.face, payload.suit);
+        state.game.addCard(newCard);
+    }
+}
 
-    console.log('card update', payload);
+function deckUpdateHandler(payload) {
+    let deck = state.game.getGameObjectById(payload.id);
+    if(deck){
+        deck.update(payload);
+    }else{
+        let newDeck = new Deck(payload.id,payload.type,payload.cards,payload.posX, payload.posY);
+        game.addDeck(newDeck);
+    }
 }
 
 /**
@@ -121,7 +134,7 @@ function onDOMMouseUp(ev) {
     ev.preventDefault();
     let id = ev.target.id;
     if (id) {
-       let idPrefix = id.split('-')[0];
+        let idPrefix = id.split('-')[0];
         switch (idPrefix) {
             case ('card'):
                 if (state.grabbedCard !== null) {
@@ -140,10 +153,16 @@ function onDOMMouseUp(ev) {
                     //console.log('emit mouse up', injectedPayload);
                     emitMouseUp(injectedPayload);
                 }
-            case('deck'):
+                break;
+            case ('deck'):
+                let injectedPayload = {
+                    targetId: id
+                }
                 let deck = state.game.getGameObjectById(id);
-                let newCard = deck.onMouseDown(ev);
+                let newCard = deck.onMouseUp(ev);
                 state.game.addCard(newCard);
+                emitMouseUp(injectedPayload);
+                break;
         }
     }
 }
@@ -151,22 +170,27 @@ function onDOMMouseUp(ev) {
 function onDOMMouseDown(ev) {
     ev.preventDefault();
     let id = ev.target.id;
-    if (id && id.startsWith('card')) {
-        //notify client
-        let target = state.game.getGameObjectById(id)
-        if (target && target.onMouseDown) {
-            target.onMouseDown(ev);
-            state.isMouseDown = true;
-            state.grabbedCard = target;
-        }
-        //notify server
-        let injectedPayload = {
-            targetId: id,
-            clientX: ev.clientX,
-            clientY: ev.clientY
-        }
-        emitMouseDown(injectedPayload);
+    let idPrefix = id.split('-')[0];
+    switch (idPrefix) {
+        case ('card'):
+            //notify client
+            let target = state.game.getGameObjectById(id)
+            if (target && target.onMouseDown) {
+                target.onMouseDown(ev);
+                state.isMouseDown = true;
+                state.grabbedCard = target;
+            }
+            //notify server
+            let injectedPayload = {
+                targetId: id,
+                clientX: ev.clientX,
+                clientY: ev.clientY
+            }
+            emitMouseDown(injectedPayload);
 
-        //console.log('emit mouse down',injectedPayload);
+            //console.log('emit mouse down',injectedPayload);
+
+            break;
     }
+
 }

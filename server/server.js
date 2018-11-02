@@ -5,6 +5,8 @@ const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const UUID = require('node-uuid');
 
+import Card from './game_objects/ServerCard.js';
+
 //server state
 const state = {
   clients: {},
@@ -48,15 +50,13 @@ function emitGameInit(injectedPayload, socket) {
   if (Object.keys(state.games).length == 0) {
     let game = new ServerGame(UUID());
     state.games[game.id] = game;
-    payload.serverGameState = game.getState();
+    payload.serverGameState = game.state;
   } else {
     let game = state.games[Object.keys(state.games)[0]];
-    payload.serverGameState = game.getState();
+    payload.serverGameState = game.state;
   }
 
   Object.assign(payload, injectedPayload);
-
-  console.log('gamestate ', payload.serverGameState.decks);
 
   if (socket !== undefined) {
     socket.emit('gameInit', payload);
@@ -66,12 +66,28 @@ function emitGameInit(injectedPayload, socket) {
 
 }
 
-function emitCardUpdate(injectedPayload) {
+function emitCardUpdate(injectedPayload, socket) {
   let payload = {};
   //console.log(injectedPayload)
   Object.assign(payload, injectedPayload);
 
-  io.emit('cardUpdate', payload);
+  if (socket !== undefined) {
+    socket.emit('cardUpdate', payload);
+  } else {
+    io.emit('cardUpdate', payload);
+  }
+}
+
+function emitDeckUpdate(injectedPayload, socket){
+  let payload = {};
+  Object.assign(payload, injectedPayload);
+
+  if (socket !== undefined) {
+    socket.emit('deckUpdate', payload);
+  } else {
+    io.emit('deckUpdate', payload);
+  }
+
 }
 
 //=================== Socket Evenet Handlers =====================
@@ -108,38 +124,58 @@ function gameInitRequestHandler(payload) {
  */
 function mouseMoveHandler(payload) {
   let object = state.games[payload.gameId].getGameObjectById(payload.targetId);
-  let objectIdPrefix = object.id.split('-')[0];
-  switch (objectIdPrefix) {
-    case ('card'):
-      if (object.owner === payload.clientId) {
-        object.onMouseMove(payload);
-        emitCardUpdate(object.state);
-      }
+  if (object) {
+    let objectIdPrefix = object.id.split('-')[0];
+    switch (objectIdPrefix) {
+      case ('card'):
+        if (object.owner === payload.clientId) {
+          object.onMouseMove(payload);
+          emitCardUpdate(object.state);
+        }
+        break;
+    }
   }
 
 }
 
 function mouseDownHandler(payload) {
   let object = state.games[payload.gameId].getGameObjectById(payload.targetId);
-  let objectIdPrefix = object.id.split('-')[0];
-  switch (objectIdPrefix) {
-    case ('card'):
-      if (object.owner === null) {
-        object.onMouseDown(payload);
-      }
+  if (object) {
+    let objectIdPrefix = object.id.split('-')[0];
+    switch (objectIdPrefix) {
+      case ('card'):
+        if (object.owner === null) {
+          object.onMouseDown(payload);
+        }
+        break;
+    }
   }
 
 }
 
 function mouseUpHandler(payload) {
   let object = state.games[payload.gameId].getGameObjectById(payload.targetId);
-  let objectIdPrefix = object.id.split('-')[0];
-  switch (objectIdPrefix) {
-    case ('card'):
-      if (object.owner === payload.clientId) {
-        object.onMouseUp(payload);
-        emitCardUpdate(object.state);
-      }
+  console.log(object.id);
+  if (object) {
+    let objectIdPrefix = object.id.split('-')[0];
+    switch (objectIdPrefix) {
+      case ('card'):
+        if (object.owner === payload.clientId) {
+          object.onMouseUp(payload);
+          emitCardUpdate(object.state);
+        }
+        console.log('card branch', object.id);
+        break;
+      case ('deck'):
+        let drawnCard = object.onMouseUp(payload);
+        console.log('drawn card id ', drawnCard.id);
+        let game = state.games[payload.gameId];
+        game.addCard(drawnCard);
+        emitCardUpdate(drawnCard.state);
+        let socket = state.clients[payload.clientId];
+        emitDeckUpdate(object.state, socket);
+        break;
+    }
   }
 
 }

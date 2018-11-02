@@ -19,15 +19,17 @@ export default class ClientDeck{
         this._deckElement.style.top = this._posY + 'px';
         this._deckElement.style.left = this._posX + 'px';
         this._deckElement.style.backgroundSize = this._CARD_WIDTH * this._cardScale + 'px ' + this._CARD_HEIGHT * this._cardScale + 'px';
-        this._deckElement.style.position = 'relative';
+        this._deckElement.style.position = 'absolute';
         this._deckElement.classList.add('deck-' + this._type);
         this._deckElement.id = this._id;
+
+        console.log('Deck constructed ', this._id);
     }
 
     draw(){
         let topCard = this._cards.pop();
         console.log('this is a deck');
-        return this.cardFactory(topCard, this._posX, this._posY);
+        return topCard;
     }
 
     attachToDOM(DOM) {
@@ -38,8 +40,10 @@ export default class ClientDeck{
         return this._deckElement;
     }
 
-    onMouseDown(ev){
+    onMouseUp(ev){
+        console.log('deck card ', this._cards);
         let topCard = this.draw();
+        console.log('nmr of cards ', this._cards.length);
         return this.cardFactory(topCard, this._posX, this._posY);
     }
 

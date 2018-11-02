@@ -1,8 +1,13 @@
 const UUID = require('node-uuid');
 
 export default class ServerCard {
-    constructor(posX, posY, suit, face) {
-        this._id = 'card-' + UUID();
+    constructor(posX, posY, suit, face, id) {
+        console.log('created with give id ', id);
+        if(id){
+            this._id = id;
+        }else{
+            this._id = 'card-' + UUID();
+        }
         this._posX = posX;
         this._posY = posY;
         this._suit = suit;
@@ -43,7 +48,9 @@ export default class ServerCard {
             posX: this._posX,
             posY: this._posY,
             owner: this._owner,
-            id: this._id
+            id: this._id,
+            face: this._face,
+            suit: this._suit
         }
     }
 
