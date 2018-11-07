@@ -10,7 +10,8 @@ import Card from './game_objects/ServerCard.js';
 //server state
 const state = {
   clients: {},
-  games: {}
+  games: {},
+  rooms: {}
 };
 
 //Game logic imports
@@ -25,10 +26,11 @@ init();
 //================ Routing ========================
 
 app.get('/', function (req, res) {
-  res.sendFile('/client/index.html', {
+  res.sendFile('/client/views/index.html', {
     root: './'
   });
 });
+
 
 //=================================================
 

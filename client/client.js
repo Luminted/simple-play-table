@@ -1,7 +1,6 @@
-;
 import Card from './game_objects/ClientCard';
 import Deck from './game_objects/ClientDeck';
-import ClientGame from './ClientGame.js';
+import ClientGame from './game_objects/ClientGame.js';
 
 window.onload = init;
 
@@ -24,11 +23,11 @@ function init() {
     socket.on('cardUpdate', cardUpdateHandler);
 
     //attaching emitters to DOM events
-    document.addEventListener('mousemove', onDOMMouseMove);
+    // document.addEventListener('mousemove', onDOMMouseMove);
 
-    document.addEventListener('mousedown', onDOMMouseDown);
+    // document.addEventListener('mousedown', onDOMMouseDown);
 
-    document.addEventListener('mouseup', onDOMMouseUp);
+    // document.addEventListener('mouseup', onDOMMouseUp);
 }
 
 //================== Socket Event Emitters ==================
@@ -191,6 +190,10 @@ function onDOMMouseDown(ev) {
             //console.log('emit mouse down',injectedPayload);
 
             break;
+    }
+
+    function buttonClick(ev){
+        console.log('Szia gomb');
     }
 
 }

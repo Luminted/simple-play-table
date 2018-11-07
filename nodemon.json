@@ -1,7 +1,7 @@
 {
     "events": {
-        "restart" : "rollup client/client.js --file ./client/client.bundle.js --format iife --sourcemap; rollup server/server.js --file ./server/server.bundle.js --format iife --sourcemap",
-        "start" : "rollup client/client.js --file ./client/client.bundle.js --format iife --sourcemap; rollup server/server.js --file ./server/server.bundle.js --format iife --sourcemap"
+        "restart" : "rollup client/client.js --file ./client/client.bundle.js --format iife --sourcemap --no-treeshake; rollup server/server.js --file ./server/server.bundle.js --format iife --sourcemap",
+        "start" : "rollup client/client.js --file ./client/client.bundle.js --format iife --sourcemap --no-treeshake; rollup server/server.js --file ./server/server.bundle.js --format iife --sourcemap"
     },
     "ignore": [
         ".git",
