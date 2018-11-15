@@ -50,14 +50,17 @@ export default class ClientCard {
         if (this._isMouseDown) {
             let mouseX = ev.clientX;
             let mouseY = ev.clientY;
-            let elementX = parseInt(this._cardElement.style.top);
-            let elementY = parseInt(this._cardElement.style.left);
             let deltaX = mouseX - this._mouseGrabX;
             let deltaY = mouseY - this._mouseGrabY;
+            let boundaryX = ev.customData.boundaryX;
+            let boundaryY = ev.customData.boundaryY;
+            let calcedX = this._grabbedPosX + deltaX;
+            let calcedY = this._grabbedPosY + deltaY;
 
-            // console.log('mousemove ', elementX + deltaX, elementY + deltaY)
+            let newCoordX = this.clamp(calcedX, 0, boundaryX - this.dimX);
+            let newCoordY = this.clamp(calcedY, 0, boundaryY - this.dimY);
 
-            this.moveTo(this._grabbedPosX + deltaX, this._grabbedPosY + deltaY);
+            this.moveTo(newCoordX, newCoordY);
 
         } else {
             return;
@@ -65,7 +68,7 @@ export default class ClientCard {
     }
 
     moveTo(coordX, coordY) {
-        console.log('move to')
+        console.log('pos', coordX, coordY)
         this._posX = coordX;
         this._posY = coordY;
         this._cardElement.style.left = coordX + 'px';
@@ -82,6 +85,33 @@ export default class ClientCard {
 
     update(payload){
        this.moveTo(payload.posX, payload.posY);
+    }
+
+    clamp(val, min, max) {
+        console.log(val);
+        if (val < min) {
+            return min;
+        }
+        if (val > max) {
+            return max;
+        }
+        return val;
+    }    
+
+    get posX(){
+        return this._posX;
+    }
+
+    get posY(){
+        return this._posY;
+    }
+
+    get dimX(){
+        return this._CARD_WIDTH * this._cardScale;
+    }
+
+    get dimY(){
+        return this._CARD_HEIGHT * this._cardScale;
     }
 
     get id(){

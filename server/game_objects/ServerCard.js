@@ -33,14 +33,32 @@ export default class ServerCard {
         if (this._owner && this._owner === payload.clientId) {
             let mouseX = payload.clientX;
             let mouseY = payload.clientY;
+            let boundaryX = payload.boundaryX;
+            let boundaryY = payload.boundaryY;
+            let dimX = payload.dimX;
+            let dimY = payload.dimY;
             let deltaX = mouseX - this._mouseGrabX;
             let deltaY = mouseY - this._mouseGrabY;
+            let calcedX = this._grabbedPosX + deltaX;
+            let calcedY = this._grabbedPosY + deltaY;
 
             // console.log('mousemove ', elementX + deltaX, elementY + deltaY)
 
-            this._posX = this._grabbedPosX + deltaX;
-            this._posY = this._grabbedPosY + deltaY;
+            this._posX = this.clamp(calcedX, 0, boundaryX - dimX);
+            this._posY = this.clamp(calcedY, 0, boundaryY - dimY);
+
+            console.log('pos ', this._posX, this._posY);
         }
+    }
+
+    clamp(val, min, max) {
+        if (val < min) {
+            return min;
+        }
+        if (val > max) {
+            return max;
+        }
+        return val;
     }
 
     get state() {

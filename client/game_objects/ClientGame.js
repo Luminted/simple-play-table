@@ -18,7 +18,7 @@ export default class ClientGame{
 
     initGame(initState){
         this._id = initState.gameId;
-        let gameArea = document.querySelector('#gameTable');
+        let gameTable = this.initGameTable(document.querySelector('#gameTable'));
         //Initializing cards
         let cards = initState.cards;
         if(cards != undefined){
@@ -26,7 +26,7 @@ export default class ClientGame{
                 let posX = cards[cardId].posX;
                 let posY = cards[cardId].posY;
                 let card = new ClientCard(cardId, posX,posY);
-                this.addCard(card);
+                this.addCard(card, gameTable);
 
             }
         }
@@ -39,7 +39,7 @@ export default class ClientGame{
                 let cards = decks[deckId].cards;
                 let type = decks[deckId].type;
                 let deck = new ClientDeck(deckId, type, cards, posX, posY);
-                this.addDeck(deck);
+                this.addDeck(deck, gameTable);
             }
         }
 
@@ -55,25 +55,33 @@ export default class ClientGame{
         return object;
     }
 
-    addCard(card){
+    addCard(card, DOMElement){
         if(!card instanceof ClientCard){
             throw "Method can only add CardClient objects!";
         }else{
             this._gameObjects.cards[card.id] = card;
-            card.attachToDOM(document.querySelector('#gameTable'));
+            card.attachToDOM(DOMElement);
         }
     }
 
-    addDeck(deck){
+    addDeck(deck, DOMElement){
         if(!deck instanceof ClientDeck){
             throw "Method can only add ClientDeck objects!";
         }else{
             this._gameObjects.decks[deck.id] = deck;
-            deck.attachToDOM(document.querySelector('#gameTable'));
+            deck.attachToDOM(DOMElement);
         }
     }
 
     get id(){
         return this._id;
+    }
+
+    initGameTable(DOMElement){
+        DOMElement.style.height = '720px';
+        DOMElement.style.width = '960px';
+        DOMElement.style.background = 'green';
+
+        return DOMElement;
     }
 }

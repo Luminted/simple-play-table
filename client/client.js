@@ -23,11 +23,11 @@ function init() {
     socket.on('cardUpdate', cardUpdateHandler);
 
     //attaching emitters to DOM events
-    // document.addEventListener('mousemove', onDOMMouseMove);
+    document.addEventListener('mousemove', onDOMMouseMove);
 
-    // document.addEventListener('mousedown', onDOMMouseDown);
+    document.addEventListener('mousedown', onDOMMouseDown);
 
-    // document.addEventListener('mouseup', onDOMMouseUp);
+    document.addEventListener('mouseup', onDOMMouseUp);
 }
 
 //================== Socket Event Emitters ==================
@@ -80,10 +80,10 @@ function cardUpdateHandler(payload) {
 
 function deckUpdateHandler(payload) {
     let deck = state.game.getGameObjectById(payload.id);
-    if(deck){
+    if (deck) {
         deck.update(payload);
-    }else{
-        let newDeck = new Deck(payload.id,payload.type,payload.cards,payload.posX, payload.posY);
+    } else {
+        let newDeck = new Deck(payload.id, payload.type, payload.cards, payload.posX, payload.posY);
         game.addDeck(newDeck);
     }
 }
@@ -115,6 +115,16 @@ function onDOMMouseMove(ev) {
     ev.preventDefault();
 
     if (state.isMouseDown) {
+        //boundary check
+        let gameTable = document.querySelector('#gameTable');
+        let boundaryX = Number(gameTable.style.width.split('px')[0]);
+        let boundaryY = Number(gameTable.style.height.split('px')[0]);
+
+        ev.customData = {
+            boundaryX,
+            boundaryY
+        }
+
         //notify client
         if (state.grabbedCard !== null) {
             state.grabbedCard.onMouseMove(ev);
@@ -123,7 +133,12 @@ function onDOMMouseMove(ev) {
         let injectedPayload = {
             targetId: state.grabbedCard.id,
             clientX: ev.clientX,
-            clientY: ev.clientY
+            clientY: ev.clientY,
+            dimX: state.grabbedCard.dimX,
+            dimY: state.grabbedCard.dimY,
+            boundaryX,
+            boundaryY
+
         }
         emitMouseMove(injectedPayload);
     }
@@ -159,7 +174,7 @@ function onDOMMouseUp(ev) {
                 }
                 let deck = state.game.getGameObjectById(id);
                 let newCard = deck.onMouseUp(ev);
-                state.game.addCard(newCard);
+                state.game.addCard(newCard, document.querySelector('#gameTable'));
                 emitMouseUp(injectedPayload);
                 break;
         }
@@ -191,9 +206,14 @@ function onDOMMouseDown(ev) {
 
             break;
     }
+}
 
-    function buttonClick(ev){
-        console.log('Szia gomb');
+function clamp(val, min, max) {
+    if (val < min) {
+        return min;
     }
-
+    if (val > max) {
+        return max;
+    }
+    return val;
 }

@@ -35,7 +35,7 @@ export default class ServerDeck {
 
                 })
             }).then((function (deck) {
-            this._cards = this.shuffle(deck);
+            this._cards = deck;
         }.bind(this)));
 
         
