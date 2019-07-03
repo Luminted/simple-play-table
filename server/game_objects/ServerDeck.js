@@ -1,18 +1,18 @@
-const UUID = require('node-uuid');
+const uuidv1 = require('uuid/v1');
 const fs = require('fs');
 import Card from './ServerCard.js';
 
 export default class ServerDeck {
     constructor(type, posX, posY) {
         console.log('initializing ', type, ' deck');
-        this._id = 'deck-' + UUID();
+        this._id = 'deck-' + uuidv1();
         //Raw card date. Should be shuffled.
         this._cards = [];
         this._type = type;
         this._posX = posX;
         this._posY = posY;
 
-        //reading config, populating cards list based on config and shuffling it.
+        //reading config, populating cards list based on config.
         this.readFileAsync('/home/leventerozsenich/Documents/web-dev/simple_card_sandbox/server/config/' + type + '_deck_config.json').then(
             function (buffer) {
                 return new Promise(function (resolve, reject) {
@@ -20,11 +20,11 @@ export default class ServerDeck {
                         let config = JSON.parse(buffer);
                         let deck = []
                         for (let suit in config.cards) {
-                            for (let card in config.cards[suit]) {
+                            for (let face of config.cards[suit]) {
                                 deck.push({
-                                    id: 'card-' + UUID(),
+                                    id: 'card-' + uuidv1(),
                                     suit: suit,
-                                    face: card
+                                    face: face
                                 });
                             }
                         }
@@ -35,7 +35,7 @@ export default class ServerDeck {
 
                 })
             }).then((function (deck) {
-            this._cards = deck;
+            this._cards = this.shuffle(deck);
         }.bind(this)));
 
         
@@ -44,8 +44,8 @@ export default class ServerDeck {
     onMouseUp(payload){
         console.log('deck card ', this._cards);
         let topCard = this._cards.pop();
-        console.log('server deck mouse up')
-        return this.cardFactory(topCard, this._posX, this._posY); 
+        console.log('server deck mouse up');
+        return this.cardFactory(topCard, this._posX + 50, this._posY + 50); 
     }
 
     cardFactory(cardRep, posX,posY){

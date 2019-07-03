@@ -14,16 +14,6 @@
     background-color: tomato;
   }
 
-.card-ace-of-spades{
-  text-indent: -9999px;
-  background: url(http://localhost:4004/views/assets/ace_of_spades.svg);
-}
-
-.deck-french{
-  text-indent: -9999px;
-  background: url(http://localhost:4004/views/assets/red_cardback.svg);
-}
-
 .container-center-aligned{
   position: inherit;
   margin-right: auto;

@@ -1,21 +1,19 @@
 import Card from "./game_objects/ServerCard";
 import Deck from "./game_objects/ServerDeck";
 import DECK_TYPES from "./game_objects/DeckTypes";
-const UUID = require('node-uuid');
+const uuidv1 = require('uuid/v1');
 
 
 export default class ServerGame{
     constructor(){
-        this._id = 'game-' + UUID();;
+        this._id = 'game-' + uuidv1();;
         this._gameObjects = {};
         this._gameObjects.cards = {};
         this._gameObjects.decks = {};
         this._clients = {};
 
         //setting up test cards
-        let card = new Card(100,100);
         let deck = new Deck(DECK_TYPES.FRENCH, 150, 150);
-        this.gameObjects.cards[card.id] = card;
         this.gameObjects.decks[deck.id] = deck;
 
         console.log('server game ready');
@@ -61,7 +59,7 @@ export default class ServerGame{
     }
 
     addDeck(deck){
-        if(card instanceof Deck){
+        if(deck instanceof Deck){
             this._gameObjects.decks[deck.id] = deck;
         }else{
             throw "Only instances of ServerDeck are allowed to be added!"

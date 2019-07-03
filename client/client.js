@@ -21,6 +21,7 @@ function init() {
     socket.on('onconnect', onConnectHandler);
     socket.on('gameInit', onGameInitHandler);
     socket.on('cardUpdate', cardUpdateHandler);
+    socket.on('deckMouseUp', deckMouseUpHandler);
 
     //attaching emitters to DOM events
     document.addEventListener('mousemove', onDOMMouseMove);
@@ -36,7 +37,7 @@ function emitGameInitRequest() {
     let payload = {
         clientId: state.id
     }
-    state.socket.emit('gameInitRequest', payload)
+    state.socket.emit('gameInitRequest', payload);
 }
 
 function emitMouseMove(injectedPayload) {
@@ -74,18 +75,16 @@ function cardUpdateHandler(payload) {
         card.update(payload);
     } else {
         let newCard = new Card(payload.id, payload.posX, payload.posY, payload.face, payload.suit);
-        state.game.addCard(newCard);
+        state.game.addCard(newCard, state.game.gameTable);
     }
 }
 
-function deckUpdateHandler(payload) {
-    let deck = state.game.getGameObjectById(payload.id);
-    if (deck) {
-        deck.update(payload);
-    } else {
-        let newDeck = new Deck(payload.id, payload.type, payload.cards, payload.posX, payload.posY);
-        game.addDeck(newDeck);
-    }
+function deckMouseUpHandler(payload) {
+    console.log('deck mouse up handler')
+    let deckId = payload.deckId;
+    let deck = state.game.getGameObjectById(deckId);
+    let newCard = deck.onMouseUp(undefined);
+    state.game.addCard(newCard, document.querySelector('#gameTable'));
 }
 
 /**

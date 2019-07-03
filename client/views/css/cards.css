@@ -1,0 +1,270 @@
+
+/*------------------------------- spades --------------------------------*/
+.card-ace-of-spades {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/ace_of_spades.svg);
+}
+
+.card-two-of-spades {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/two_of_spades.svg);
+}
+
+.card-three-of-spades {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/three_of_spades.svg);
+}
+
+.card-four-of-spades {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/four_of_spades.svg);
+}
+
+.card-five-of-spades {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/five_of_spades.svg);
+}
+
+.card-six-of-spades {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/six_of_spades.svg);
+}
+
+.card-seven-of-spades {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/seven_of_spades.svg);
+}
+
+.card-eight-of-spades {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/eight_of_spades.svg);
+}
+
+.card-nine-of-spades {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/nine_of_spades.svg);
+}
+
+.card-ten-of-spades {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/ten_of_spades.svg);
+}
+
+.card-jack-of-spades {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/jack_of_spades.svg);
+}
+
+.card-queen-of-spades {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/queen_of_spades.svg);
+}
+
+.card-king-of-spades {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/king_of_spades.svg);
+}
+
+/*------------------------------- diamonds --------------------------------*/
+.card-ace-of-diamonds {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/ace_of_diamonds.svg);
+}
+
+.card-two-of-diamonds {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/two_of_diamonds.svg);
+}
+
+.card-three-of-diamonds {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/three_of_diamonds.svg);
+}
+
+.card-four-of-diamonds {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/four_of_diamonds.svg);
+}
+
+.card-five-of-diamonds {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/five_of_diamonds.svg);
+}
+
+.card-six-of-diamonds {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/six_of_diamonds.svg);
+}
+
+.card-seven-of-diamonds {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/seven_of_diamonds.svg);
+}
+
+.card-eight-of-diamonds {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/eight_of_diamonds.svg);
+}
+
+.card-nine-of-diamonds {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/nine_of_diamonds.svg);
+}
+
+.card-ten-of-diamonds {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/ten_of_diamonds.svg);
+}
+
+.card-jack-of-diamonds {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/jack_of_diamonds.svg);
+}
+
+.card-queen-of-diamonds {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/queen_of_diamonds.svg);
+}
+
+.card-king-of-diamonds {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/king_of_diamonds.svg);
+}
+
+/*------------------------------- clubs --------------------------------*/
+.card-ace-of-clubs {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/ace_of_clubs.svg);
+}
+
+.card-two-of-clubs {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/two_of_clubs.svg);
+}
+
+.card-three-of-clubs {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/three_of_clubs.svg);
+}
+
+.card-four-of-clubs {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/four_of_clubs.svg);
+}
+
+.card-five-of-clubs {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/five_of_clubs.svg);
+}
+
+.card-six-of-clubs {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/six_of_clubs.svg);
+}
+
+.card-seven-of-clubs {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/seven_of_clubs.svg);
+}
+
+.card-eight-of-clubs {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/eight_of_clubs.svg);
+}
+
+.card-nine-of-clubs {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/nine_of_clubs.svg);
+}
+
+.card-ten-of-clubs {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/ten_of_clubs.svg);
+}
+
+.card-jack-of-clubs {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/jack_of_clubs.svg);
+}
+
+.card-queen-of-clubs {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/queen_of_clubs.svg);
+}
+
+.card-king-of-clubs {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/king_of_clubs.svg);
+}
+
+/*------------------------------- hearts --------------------------------*/
+.card-ace-of-hearts {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/ace_of_hearts.svg);
+}
+
+.card-two-of-hearts {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/two_of_hearts.svg);
+}
+
+.card-three-of-hearts {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/three_of_hearts.svg);
+}
+
+.card-four-of-hearts {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/four_of_hearts.svg);
+}
+
+.card-five-of-hearts {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/five_of_hearts.svg);
+}
+
+.card-six-of-hearts {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/six_of_hearts.svg);
+}
+
+.card-seven-of-hearts {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/seven_of_hearts.svg);
+}
+
+.card-eight-of-hearts {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/eight_of_hearts.svg);
+}
+
+.card-nine-of-hearts {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/nine_of_hearts.svg);
+}
+
+.card-ten-of-hearts {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/ten_of_hearts.svg);
+}
+
+.card-jack-of-hearts {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/jack_of_hearts.svg);
+}
+
+.card-queen-of-hearts {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/queen_of_hearts.svg);
+}
+
+.card-king-of-hearts {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/faces/king_of_hearts.svg);
+}
+
+
+.deck-french {
+    text-indent: -9999px;
+    background: url(http://localhost:4004/views/assets/cards/french/backs/red_cardback.svg);
+}

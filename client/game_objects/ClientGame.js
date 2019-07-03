@@ -10,7 +10,6 @@ export default class ClientGame{
         this._gameObjects = {}
         this._gameObjects.cards = {};
         this._gameObjects.decks = {};
-
         this.initGame(initState);
 
         console.log('client game ready');
@@ -25,7 +24,9 @@ export default class ClientGame{
             for(let cardId in cards){
                 let posX = cards[cardId].posX;
                 let posY = cards[cardId].posY;
-                let card = new ClientCard(cardId, posX,posY);
+                let suit = cards[cardId].suit;
+                let face = cards[cardId].face;
+                let card = new ClientCard(cardId, posX,posY,face,suit);
                 this.addCard(card, gameTable);
 
             }

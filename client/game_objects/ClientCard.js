@@ -13,27 +13,12 @@ export default class ClientCard {
         this._face = face;
         this._suit = suit;
 
-        //creating DOM representation
-        this._cardElement = document.createElement('div');
-        this._cardElement.style.backgroundColor = 'white';
-        this._cardElement.style.height = this._CARD_HEIGHT * this._cardScale + 'px';
-        this._cardElement.style.width = this._CARD_WIDTH * this._cardScale + 'px';
-        this._cardElement.style.top = this._posY + 'px';
-        this._cardElement.style.left = this._posX + 'px';
-        this._cardElement.style.backgroundSize = this._CARD_WIDTH * this._cardScale + 'px ' + this._CARD_HEIGHT * this._cardScale + 'px';
-        this._cardElement.style.position = 'absolute';
-        this._cardElement.classList.add('card-ace-of-spades');
-        this._cardElement.id = this._id;
-        //registering listeners
-        // this._cardElement.onmousedown = this.onMouseDown.bind(this);
-        // this._cardElement.onmouseup = this.onMouseUp.bind(this);
-        // document.addEventListener('mousemove', this.onMouseMove.bind(this));
+        this.constructDOM();
 
         console.log('card consturcted ', this._id);
     }
 
     onMouseDown(ev) {
-        // console.log('mousedown ', this._isMouseDown);
         this._isMouseDown = true;
         this._mouseGrabX = ev.clientX;
         this._mouseGrabY = ev.clientY;
@@ -42,7 +27,6 @@ export default class ClientCard {
     }
 
     onMouseUp(ev) {
-        // console.log('mouseup ', this._isMouseDown);
         this._isMouseDown = false;
     }
 
@@ -85,10 +69,12 @@ export default class ClientCard {
 
     update(payload){
        this.moveTo(payload.posX, payload.posY);
+       if(!this._cardElement){
+           this.constructDOM();
+       }
     }
 
     clamp(val, min, max) {
-        console.log(val);
         if (val < min) {
             return min;
         }
@@ -96,7 +82,21 @@ export default class ClientCard {
             return max;
         }
         return val;
-    }    
+    }   
+    
+    constructDOM(){
+        //creating DOM representation
+        this._cardElement = document.createElement('div');
+        this._cardElement.style.backgroundColor = 'white';
+        this._cardElement.style.height = this._CARD_HEIGHT * this._cardScale + 'px';
+        this._cardElement.style.width = this._CARD_WIDTH * this._cardScale + 'px';
+        this._cardElement.style.top = this._posY + 'px';
+        this._cardElement.style.left = this._posX + 'px';
+        this._cardElement.style.backgroundSize = this._CARD_WIDTH * this._cardScale + 'px ' + this._CARD_HEIGHT * this._cardScale + 'px';
+        this._cardElement.style.position = 'absolute';
+        this._cardElement.classList.add('card-' + this._face + '-of-' + this._suit);
+        this._cardElement.id = this._id;
+    }
 
     get posX(){
         return this._posX;

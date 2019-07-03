@@ -1,4 +1,4 @@
-const UUID = require('node-uuid');
+const uuidv1 = require('uuid/v1');
 
 export default class ServerCard {
     constructor(posX, posY, suit, face, id) {
@@ -6,7 +6,7 @@ export default class ServerCard {
         if(id){
             this._id = id;
         }else{
-            this._id = 'card-' + UUID();
+            this._id = 'card-' + uuidv1();
         }
         this._posX = posX;
         this._posY = posY;

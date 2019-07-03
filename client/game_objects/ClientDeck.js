@@ -51,7 +51,7 @@ export default class ClientDeck{
         let id = cardRep.id;
         let suit = cardRep.suit;
         let face = cardRep.face;
-        return new Card(id, posX, posY, face, suit);
+        return new Card(id, posX + 50, posY + 50, face, suit);
     }
     
     get id(){
